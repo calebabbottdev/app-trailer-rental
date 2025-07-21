@@ -1,11 +1,16 @@
 import express from 'express';
 
-const app = express();
-const port = process.env.PORT || 8080;
+import users from './routes/users';
+import trailers from './routes/trailers';
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello from Express v5 on Cloud Run!' });
-});
+const app = express();
+
+app.use(express.json());
+
+app.use('/api/users', users);
+app.use('/api/trailers', trailers);
+
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
   console.log(`✅ Server listening on port ${port}`);
